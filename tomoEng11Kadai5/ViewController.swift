@@ -19,23 +19,23 @@ class ViewController: UIViewController {
     }
 
     @IBAction private func calculateButtonPressed(_ sender: UIButton) {
+        guard let leftNumber = Float(leftTextField.text!) else {
+            showAlert(message: "割られる数を入力してください")
+            return
+        }
 
-        guard leftTextField.text! != "" else {
+        guard let rightNumber = Float(rightTextField.text!) else {
             showAlert(message: "割る数を入力してください")
             return
         }
-        if rightTextField.text! == ""  {
-            showAlert(message: "割られる数を入力してください")
-        } else if rightTextField.text! == "0" {
+
+        guard rightNumber != 0 else {
             showAlert(message: "0以外の数を入力してください")
+            return
         }
 
-        if let leftNumber = Float(leftTextField.text!), let rightNumber = Float(rightTextField.text!) {
-            if rightNumber != 0 {
-                let result = leftNumber / rightNumber
-                resultLabel.text = String(result)
-            }
-        }
+        let result = leftNumber / rightNumber
+        resultLabel.text = String(result)
     }
 
     private func showAlert(message: String) {
